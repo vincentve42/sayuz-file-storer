@@ -385,8 +385,8 @@ class Ini{
 
             if(strcmp($check[0], $key) == 0)
             {
-                
-                return $check[1];
+                $hasil = str_replace("\n", "", $check[1]);
+                return $hasil;
             }
         }
         fclose($fileOpen);
