@@ -2,9 +2,13 @@
 
 namespace Ini;
 
+
+
 class Ini{
     public string $path;
     public string $file;
+
+    
 
     public function __construct($path, $file)
     {
@@ -40,9 +44,41 @@ class Ini{
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            print("Kaga ada filenya");
             return 0;
         }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        $key_list = [];
+        $value_list = [];
+        while(($line = fgets($fileOpen)) != false)
+        {
+            $content = explode("=",$line,3);
+            
+            $key_list[] = $content[0];
+
+            $value_list[] = $content[1];
+
+            print($content[1]);
+
+        }
+        fclose($fileOpen);
+
+        $index = 0;
+
+        $fileWrite = fopen($this->path . "/" . $this->file . ".sayuz", "w");
+
+        fwrite($fileWrite,"");
+
+        fclose($fileWrite);
+
+        $fileAppend = fopen($this->path . "/" . $this->file . ".sayuz", "a");
+
+        foreach($key_list as $key)
+        {
+            fwrite($fileAppend,$key. "=". $value_list[$index]. "\n");
+
+            $index++;
+        }
+        
         
     }
     public function getInt(string $key)
