@@ -12,50 +12,166 @@ class Ini{
 
         $this->file = $file;
 
-        $check_file = fopen($path . "/" . $file . ".ini", "r");
+        $check_file = fopen($path . "/" . $file . ".sayuz", "r");
         if($check_file == NULL)
         {
-            fopen($path . "/" . $file . ".ini", "w");
-            print("File ". $path."/".$file. ".ini not found\n Creating the file....");
+            $create_new_file = fopen($path . "/" . $file . ".sayuz", "w");
+            print("File ". $path."/".$file. ".sayuz not found\n Creating the file....");
+            fclose($create_new_file);
+            
+            
         }
-        fclose($check_file);
+        else
+        {
+            fclose($check_file);
+        }
+        
     }
     public function __destruct()
     {
         
     }
-    public function addInt($key)
+    public function setInt(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            print("Kaga ada filenya");
+            return 0;
+        }
         
     }
-    public function getInt($key)
+    public function getInt(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            print("Kaga ada filenya");
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        while(($line = fgets($fileOpen)) != false)
+        {
+            $check = explode('=',$line,2);
+            if(strcmp($check[0], $key) == 0)
+            {
+                return strval($check[1]);
+            }
+        }
+        fclose($fileOpen);
+        return 0;
 
     }
-    public function addFloat($key)
+    public function setFloat(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
 
     }
-    public function getFloat($key)
+    public function getFloat(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            print("Kaga ada filenya");
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        while(($line = fgets($fileOpen)) != false)
+        {
+            $check = explode('=',$line,2);
+            if(strcmp($check[0], $key) == 0)
+            {
+                return floatval($check[1]);
+            }
+        }
+        fclose($fileOpen);
 
     } 
-    public function addBoolean($key)
+    public function setBoolean(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
 
     }
-    public function getBoolean($key)
+    public function getBoolean(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            print("Kaga ada filenya");
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        while(($line = fgets($fileOpen)) != false)
+        {
+            $check = explode('=',$line,2);
+            if(strcmp($check[0], $key) == 0)
+            {
+                return boolval($check[0]);
+            }
+        }
+        fclose($fileOpen);
 
     }
-    public function addString($key)
+    public function setString(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
 
     }
-    public function getString($key)
+    public function getString(string $key)
     {
+        // validator
+        if(trim($key) === "")
+        {
+            return 0;
+        }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            print("Kaga ada filenya");
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        while(($line = fgets($fileOpen)) != false)
+        {
+            $check = explode('=',$line,2);
+            $remove = strlen($check[1]);
+            
+
+            if(strcmp($check[0], $key) == 0)
+            {
+
+                return $check[1];
+            }
+        }
+        fclose($fileOpen);
 
     }
-   
 }
 ?>
