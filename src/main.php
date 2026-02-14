@@ -105,7 +105,7 @@ class Ini{
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            print("Kaga ada filenya");
+           
             return 0;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
@@ -193,7 +193,7 @@ class Ini{
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            print("Kaga ada filenya");
+           
             return 0;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
@@ -285,7 +285,7 @@ class Ini{
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            print("Kaga ada filenya");
+           
             return 0;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
@@ -372,7 +372,7 @@ class Ini{
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            print("Kaga ada filenya");
+           
             return null;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
