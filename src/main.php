@@ -305,11 +305,11 @@ class Ini{
         // validator
         if(trim($key) === "")
         {
-            return;
+            return null;
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
-            return;
+            return null;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
         $key_list = [];
@@ -368,21 +368,18 @@ class Ini{
         // validator
         if(trim($key) === "")
         {
-            return 0;
+            return null;
         }
         if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
         {
             print("Kaga ada filenya");
-            return 0;
+            return null;
         }
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
         while(($line = fgets($fileOpen)) != false)
         {
             
             $check = explode('=',$line,2);
-          
-            
-
             if(strcmp($check[0], $key) == 0)
             {
                 $hasil = str_replace("\n", "", $check[1]);
