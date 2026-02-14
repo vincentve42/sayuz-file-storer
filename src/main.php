@@ -8,8 +8,6 @@ class Ini{
     public string $path;
     public string $file;
 
-    
-
     public function __construct($path, $file)
     {
         $this->path = $path;
@@ -35,7 +33,7 @@ class Ini{
     {
         
     }
-    public function setInt(string $key)
+    public function setInt(string $key, int $value)
     {
         // validator
         if(trim($key) === "")
@@ -49,16 +47,18 @@ class Ini{
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
         $key_list = [];
         $value_list = [];
+        $line_count = 0;
         while(($line = fgets($fileOpen)) != false)
         {
-            $content = explode("=",$line,3);
             
-            $key_list[] = $content[0];
+                $content = explode("=",$line,2);
+            
+                $key_list[] = $content[0];
 
-            $value_list[] = $content[1];
+                $value_list[] = $content[1];
 
-            print($content[1]);
-
+                $line_count++;
+            
         }
         fclose($fileOpen);
 
@@ -72,11 +72,26 @@ class Ini{
 
         $fileAppend = fopen($this->path . "/" . $this->file . ".sayuz", "a");
 
-        foreach($key_list as $key)
+
+        $isKeyExist = false;
+        foreach($key_list as $keys)
         {
-            fwrite($fileAppend,$key. "=". $value_list[$index]. "\n");
+            
+            if(strcmp($keys, $key) == 0)
+            {
+                fwrite($fileAppend,$keys. "=". $value. "\n");
+                $isKeyExist = true;
+            }
+            else
+            {
+                if($value_list[$index] != null) fwrite($fileAppend,$keys. "=". $value_list[$index]);
+            }
 
             $index++;
+        }
+        if(!$isKeyExist)
+        {
+             fwrite($fileAppend,$key. "=". $value. "\n");
         }
         
         
@@ -106,14 +121,68 @@ class Ini{
         return 0;
 
     }
-    public function setFloat(string $key)
+    public function setFloat(string $key, float $value)
     {
         // validator
         if(trim($key) === "")
         {
             return 0;
         }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        $key_list = [];
+        $value_list = [];
+        $line_count = 0;
+        while(($line = fgets($fileOpen)) != false)
+        {
+            
+                $content = explode("=",$line,2);
+            
+                $key_list[] = $content[0];
 
+                $value_list[] = $content[1];
+
+                $line_count++;
+            
+        }
+        fclose($fileOpen);
+
+        $index = 0;
+
+        $fileWrite = fopen($this->path . "/" . $this->file . ".sayuz", "w");
+
+        fwrite($fileWrite,"");
+
+        fclose($fileWrite);
+
+        $fileAppend = fopen($this->path . "/" . $this->file . ".sayuz", "a");
+
+
+        $isKeyExist = false;
+        foreach($key_list as $keys)
+        {
+            
+            if(strcmp($keys, $key) == 0)
+            {
+                fwrite($fileAppend,$keys. "=". $value. "\n");
+                $isKeyExist = true;
+            }
+            else
+            {
+                if($value_list[$index] != null) fwrite($fileAppend,$keys. "=". $value_list[$index]);
+            }
+
+            $index++;
+        }
+        if(!$isKeyExist)
+        {
+             fwrite($fileAppend,$key. "=". $value. "\n");
+        }
+        
+        
     }
     public function getFloat(string $key)
     {
@@ -139,14 +208,73 @@ class Ini{
         fclose($fileOpen);
 
     } 
-    public function setBoolean(string $key)
+    public function setBoolean(string $key, bool $value)
     {
         // validator
         if(trim($key) === "")
         {
             return 0;
         }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            return 0;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        $key_list = [];
+        $value_list = [];
+        $line_count = 0;
+        while(($line = fgets($fileOpen)) != false)
+        {
+            
+                $content = explode("=",$line,2);
+            
+                $key_list[] = $content[0];
 
+                $value_list[] = $content[1];
+
+                $line_count++;
+            
+        }
+        fclose($fileOpen);
+
+        $index = 0;
+
+        $fileWrite = fopen($this->path . "/" . $this->file . ".sayuz", "w");
+
+        fwrite($fileWrite,"");
+
+        fclose($fileWrite);
+
+        $fileAppend = fopen($this->path . "/" . $this->file . ".sayuz", "a");
+
+
+        $isKeyExist = false;
+        foreach($key_list as $keys)
+        {
+            
+            if(strcmp($keys, $key) == 0)
+            {
+                fwrite($fileAppend,$keys. "=". $value. "\n");
+                $isKeyExist = true;
+            }
+            else
+            {
+                if($value_list[$index] != null)
+                {
+                    
+                         fwrite($fileAppend,$keys. "=". $value_list[$index]);
+                }
+
+            }
+
+            $index++;
+        }
+        if(!$isKeyExist)
+        {  
+            fwrite($fileAppend,$key. "=". $value. "\n");
+        }
+        
+        
     }
     public function getBoolean(string $key)
     {
@@ -172,14 +300,68 @@ class Ini{
         fclose($fileOpen);
 
     }
-    public function setString(string $key)
+    public function setString(string $key,string $value)
     {
         // validator
         if(trim($key) === "")
         {
-            return 0;
+            return;
         }
+        if(!file_exists($this->path . "/" . $this->file . ".sayuz"))
+        {
+            return;
+        }
+        $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
+        $key_list = [];
+        $value_list = [];
+        $line_count = 0;
+        while(($line = fgets($fileOpen)) != false)
+        {
+            
+                $content = explode("=",$line,2);
+            
+                $key_list[] = $content[0];
 
+                $value_list[] = $content[1];
+
+                $line_count++;
+            
+        }
+        fclose($fileOpen);
+
+        $index = 0;
+
+        $fileWrite = fopen($this->path . "/" . $this->file . ".sayuz", "w");
+
+        fwrite($fileWrite,"");
+
+        fclose($fileWrite);
+
+        $fileAppend = fopen($this->path . "/" . $this->file . ".sayuz", "a");
+
+
+        $isKeyExist = false;
+        foreach($key_list as $keys)
+        {
+            
+            if(strcmp($keys, $key) == 0)
+            {
+                fwrite($fileAppend,$keys. "=". $value. "\n");
+                $isKeyExist = true;
+            }
+            else
+            {
+                if($value_list[$index] != null) fwrite($fileAppend,$keys. "=". $value_list[$index]);
+            }
+
+            $index++;
+        }
+        if(!$isKeyExist)
+        {
+             fwrite($fileAppend,$key. "=". $value. "\n");
+        }
+        
+        
     }
     public function getString(string $key)
     {
@@ -196,13 +378,14 @@ class Ini{
         $fileOpen = fopen($this->path . "/" . $this->file . ".sayuz", "r");
         while(($line = fgets($fileOpen)) != false)
         {
+            
             $check = explode('=',$line,2);
-            $remove = strlen($check[1]);
+          
             
 
             if(strcmp($check[0], $key) == 0)
             {
-
+                
                 return $check[1];
             }
         }
