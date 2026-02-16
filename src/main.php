@@ -14,19 +14,15 @@ class Ini{
 
         $this->file = $file;
 
-        $check_file = fopen($path . "/" . $file . ".sayuz", "r");
-        if($check_file == NULL)
+        
+        if(!file_exists($path . "/" . $file . ".sayuz"))
         {
             $create_new_file = fopen($path . "/" . $file . ".sayuz", "w");
-            print("File ". $path."/".$file. ".sayuz not found\n Creating the file....");
             fclose($create_new_file);
             
             
         }
-        else
-        {
-            fclose($check_file);
-        }
+        
         
     }
     public function __destruct()
